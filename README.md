@@ -56,3 +56,29 @@
 
 
 3.5. Example Visual Outputs
+
+
+
+
+## 1. Initial Setup
+
+- Setup BigQuery Data Environment
+
+Important: You do not need to setup a billing acount or pay a single cent to use Google’s free BigQuery Sandbox!
+
+But you need a billing account for Google Cloud Storage.
+
+### 1. BigQuery Sandbox
+
+Visit the official Google guide to setup a free BigQuery Sandbox instance – you can use an existing Gmail account or setup a new one just for the Serious SQL course.
+
+```https://cloud.google.com/bigquery/docs/sandbox```
+
+
+### 2. Navigating The BigQuery Console
+
+Once you are inside the BigQuery console after setting up the BigQuery Sandbox – click on the COMPOSE A NEW QUERY button.
+
+![image](https://github.com/AdeolaAdesina/SQL_Introduction/assets/29931071/ac67ffe1-48dd-4779-9cb1-513abe471c3b)
+
+
