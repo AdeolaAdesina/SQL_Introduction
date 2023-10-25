@@ -523,5 +523,7 @@ After all the code has ran successfully – you can open a new BigQuery tab and 
 ```SELECT * FROM health.users LIMIT 10```
 
 
+1. Initial Setup
 
+- Download configuration files for PostgreSQL database setup(PDADMIN)
 
