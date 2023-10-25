@@ -527,3 +527,75 @@ After all the code has ran successfully – you can open a new BigQuery tab and 
 
 - Download configuration files for PostgreSQL database setup(PDADMIN)
 
+Google search - ```postgresql download```
+
+Hit postgresql.org
+
+Download the windows installer
+
+Launch the installer, give it a password and a port number.
+
+Note that this postgresql installation comes with PGADMIN as well.
+
+
+Now download the data we will upload to PG-ADMIN:
+
+```
+Serious SQL datasets: https://storage.googleapis.com/dwd-datasets/serious-sql/serious-sql.zip
+
+```
+
+Now after the installation, hit start and search postgresql documentation, find the PDADMIN icon.
+
+Open PGADMIN and left click on database to create a new database.
+
+Left click on login/group role to create new permissions.
+
+Now left click on the database and click on 'query tool' to query your new database.
+
+Now create a table:
+
+```
+create table employee(empID int, namee varchar(25));
+```
+
+Now to check our newly created table:
+
+```
+select * from employee;
+```
+
+Now create binary file. 
+
+Click on file -> preferences -> paths -> binary paths
+
+Now go to the PGADMIN file location you opened previously, left click and click on properties, then click on open file location,
+
+Copy the path and paste in PGADMIN binary path, and save.
+
+Do the same for PostgreSQL advanced server bianry path.
+
+Video explanation: https://www.youtube.com/watch?v=klEB-URLgmk
+
+
+## Importing data into postgres/PGADMIN Part 1
+
+Let's import a supermarket sales data into postgres/PGADMIN
+
+First we'll create the table:
+
+```
+CREATE TABLE supermarket_sales
+(
+ cust_id bigserial,
+ cust_name text,
+ item text,
+ price int
+);
+```
+
+Left click on tables and refresh to see the new table created.
+
+Now left click on the table and click "import/export data".
+
+
