@@ -177,20 +177,137 @@ Video explanation: https://www.youtube.com/watch?v=klEB-URLgmk
 
 Let's import a supermarket sales data into postgres/PGADMIN
 
-First we'll create the table:
+
+Now we have 5 tables.
+
+Customer table:
+
+![Screenshot 2023-10-31 at 16 21 27](https://github.com/AdeolaAdesina/SQL_Introduction/assets/29931071/5b9fe18a-252d-48de-815c-b7f67d2b7ccd)
+
+To create table:
 
 ```
-CREATE TABLE supermarket_sales
-(
- cust_id bigserial,
- cust_name text,
- item text,
- price int
+CREATE TABLE Customer (
+    customer_id serial PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    phone VARCHAR(20)
 );
 ```
 
-Left click on tables and refresh to see the new table created.
+To insert data into table:
 
-Now left click on the table and click "import/export data".
+```
+INSERT INTO Customer (first_name, last_name, email, phone)
+VALUES
+    ('John', 'Smith', 'john.smith@email.com', '123-456-7890'),
+    ('Jane', 'Doe', 'jane.doe@email.com', '987-654-3210'),
+    ('Alice', 'Johnson', 'alice@email.com', '555-123-4567');
+```
 
+
+
+Second table  - Product table
+
+![Screenshot 2023-10-31 at 16 21 46](https://github.com/AdeolaAdesina/SQL_Introduction/assets/29931071/df998036-6135-4656-bb20-4e80845c5dc3)
+
+
+To create table:
+
+```
+CREATE TABLE Product (
+    product_id serial PRIMARY KEY,
+    product_name VARCHAR(100),
+    category_id INT,
+    price DECIMAL(10, 2),
+    description TEXT
+);
+```
+
+To insert data into Product table:
+
+```
+INSERT INTO Product (product_name, category_id, price, description)
+VALUES
+    ('Apples', 1, 1.99, 'Fresh red apples'),
+    ('Bread', 2, 2.49, 'Whole wheat bread'),
+    ('Milk', 3, 2.29, '2% reduced-fat milk'),
+    ('Cereal', 3, 3.99, 'Honey nut cereal');
+```
+
+
+Third table - Category table
+
+To create table:
+
+```
+CREATE TABLE Category (
+    category_id serial PRIMARY KEY,
+    category_name VARCHAR(50)
+);
+```
+
+To insert data into table:
+
+```
+INSERT INTO Category (category_name)
+VALUES
+    ('Fruits'),
+    ('Bakery'),
+    ('Dairy');
+```
+
+
+Fourth table - Sales Table
+
+To create table:
+
+```
+CREATE TABLE Sales (
+    sale_id serial PRIMARY KEY,
+    customer_id INT,
+    sale_date DATE,
+    total_amount DECIMAL(10, 2)
+);
+```
+
+To insert data into table:
+
+```
+INSERT INTO Sales (customer_id, sale_date, total_amount)
+VALUES
+    (1, '2023-10-10', 15.76),
+    (2, '2023-10-11', 8.95),
+    (3, '2023-10-12', 24.33);
+```
+
+
+Fifth table - SalesItem table:
+
+![Screenshot 2023-10-31 at 16 22 33](https://github.com/AdeolaAdesina/SQL_Introduction/assets/29931071/965d3aa2-7b5e-4b1c-ae5c-3c06ccb193ff)
+
+
+To create table:
+
+```
+CREATE TABLE SalesItem (
+    sale_item_id serial PRIMARY KEY,
+    sale_id INT,
+    product_id INT,
+    quantity INT,
+    item_price DECIMAL(10, 2)
+);
+```
+
+To insert data into table:
+
+```
+INSERT INTO SalesItem (sale_id, product_id, quantity, item_price)
+VALUES
+    (1, 101, 3, 5.97),
+    (1, 103, 2, 4.58),
+    (2, 102, 1, 2.49),
+    (3, 104, 4, 15.96);
+```
 
