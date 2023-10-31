@@ -239,6 +239,9 @@ VALUES
 
 Third table - Category table
 
+![Screenshot 2023-10-31 at 16 22 03](https://github.com/AdeolaAdesina/SQL_Introduction/assets/29931071/368ea196-db1e-466d-a8e4-cb1b231e261f)
+
+
 To create table:
 
 ```
@@ -260,6 +263,9 @@ VALUES
 
 
 Fourth table - Sales Table
+
+![Screenshot 2023-10-31 at 16 22 18](https://github.com/AdeolaAdesina/SQL_Introduction/assets/29931071/0df2777c-c880-4ba9-88a7-434e6ab2239e)
+
 
 To create table:
 
