@@ -555,7 +555,7 @@ FROM Customers
 RIGHT JOIN Orders ON Customers.customer_id = Orders.customer_id;
 ```
 
-Insight: You can use RIGHT JOINs to see all orders and the corresponding customer names, including orders without customers.
+Insight: You can use RIGHT JOINs to see all orders and the corresponding customer names, including orders without customers. 
 
 
 
