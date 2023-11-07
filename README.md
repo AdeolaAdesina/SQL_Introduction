@@ -12,8 +12,8 @@
 - Sorting Outputs
 - Record Counts
 - Distinct Values
-- Column Value Frequency
 - Identify Deduplicate Records
+- Column Value Frequency
 - Summary Statistics
 - Distribution Functions
 
@@ -277,4 +277,75 @@ VALUES
     (2, 102, 1, 2.49),
     (3, 104, 4, 15.96);
 ```
+
+
+
+## 1. Select DISTINCT
+
+In PostgreSQL, the SELECT DISTINCT statement is used to retrieve unique values from a specific column or combination of columns in a table. It eliminates duplicate values, so the result set only contains distinct, non-repeating values.
+
+For example, if you have a "Product" table and want to find the distinct product categories, you can use SELECT DISTINCT as follows:
+
+```
+SELECT DISTINCT category_id
+FROM Product;
+```
+
+Example for Gleaning Insights:
+
+Suppose you have a "Sales" table and you want to find unique sale dates. Using SELECT DISTINCT, you can discover when sales occurred without repeating the same date:
+
+```
+SELECT DISTINCT sale_date
+FROM Sales;
+```
+
+## 2. Where statement.
+
+In PostgreSQL, the WHERE clause is used in a SELECT statement to filter rows based on a specified condition.
+
+Example for Gleaning Insights:
+
+Let's say you have a "Sales" table and you want to find insights about sales that occurred on a specific date. You can use the WHERE clause in combination with SELECT DISTINCT to find unique sale dates for a particular customer. For example:
+
+```
+SELECT DISTINCT sale_date
+FROM Sales
+WHERE customer_id = 1;
+```
+
+
+## 3. Order By.
+
+In PostgreSQL, the ORDER BY clause is used in a SELECT statement to sort the result set based on one or more columns in either ascending (default) or descending order. It is a crucial SQL feature for arranging data in a specific order, which can be beneficial for data analysis and reporting.
+
+
+Example for Gleaning Insights:
+
+Let's say you have a "Sales" table and you want to analyze the sales data by the total amount spent in descending order to identify the most significant sales. You can use the ORDER BY clause like this:
+
+```
+SELECT customer_id, total_amount, sale_date
+FROM Sales
+ORDER BY total_amount DESC;
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
