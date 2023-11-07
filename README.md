@@ -332,11 +332,248 @@ ORDER BY total_amount DESC;
 
 
 
+## 4. And / Or.
+
+In PostgreSQL, AND and OR are logical operators used in conjunction with the WHERE clause to combine multiple conditions to filter rows in a SELECT statement. They allow you to create complex filtering criteria by specifying that all or any of the conditions must be met, respectively.
+
+
+Example for Gleaning Insights:
+
+Suppose you have a "Sales" table and you want to analyze sales that meet specific criteria. You can use AND and OR to filter the data to extract insights.
+
+A. Using AND:
+
+Let's say you want to find sales where the total amount is greater than $20 and the sale date is in October 2023:
+
+```
+SELECT customer_id, total_amount, sale_date
+FROM Sales
+WHERE total_amount > 20 AND EXTRACT(MONTH FROM sale_date) = 10;
+```
+
+In this query, both conditions (total amount > 20 and sale date is in October) must be true for a sale to be included in the result set. This can help you glean insights about sales with high values that occurred in a specific month.
+
+
+B. Using OR:
+
+Let's say you want to find sales where the total amount is greater than $30 or the sale date is in October 2023:
+
+
+```
+SELECT customer_id, total_amount, sale_date
+FROM Sales
+WHERE total_amount > 30 OR EXTRACT(MONTH FROM sale_date) = 10;
+```
+
+In this query, a sale will be included in the result set if either condition (total amount > 30 or sale date is in October) is true.
+
+
+## 5. Count
+
+In PostgreSQL, the COUNT function is used to count the number of rows in a table or the number of rows that meet a specific condition in a SELECT statement.
+
+
+Example for Gleaning Insights:
+
+Let's say you have a "Sales" table and you want to obtain insights about the data using the COUNT function:
+
+A. Counting Total Sales:
+
+You can count the total number of sales in the "Sales" table to get an idea of the overall volume of transactions:
+
+
+```
+SELECT COUNT(*) as total_sales
+FROM Sales;
+```
+
+This query will provide you with the total number of sales made, which can be useful for various analytical purposes.
+
+
+B. Counting Sales by Date:
+
+To analyze the distribution of sales across different dates, you can count the number of sales on each date:
+
+
+```
+SELECT sale_date, COUNT(*) as sales_count
+FROM Sales
+GROUP BY sale_date;
+```
+
+This query will give you insights into the distribution of sales over time, helping you identify patterns or peak sales dates.
+
+
+C. Counting Unique Customers:
+
+If you want to know how many unique customers have made purchases, you can use COUNT(DISTINCT customer_id):
+
+```
+SELECT COUNT(DISTINCT customer_id) as unique_customers
+FROM Sales;
+```
+
+This can help you understand the customer base and customer retention.
+
+
+
+## 6. Sum
+
+In PostgreSQL, the SUM function is used to calculate the total sum of numeric values in a specific column or expression. It's a valuable tool for obtaining insights related to the summation of data, which can be crucial for various types of data analysis and reporting.
+
+
+Example for Gleaning Insights:
+
+Let's say you have a "Sales" table and you want to obtain insights about the total amount spent on sales. You can use the SUM function for various scenarios:
+
+A. Total Sales Amount:
+
+To calculate the total amount spent across all sales:
+
+```
+SELECT SUM(total_amount) as total_sales_amount
+FROM Sales;
+```
+
+This query will give you the overall sum of all sales, providing insight into the total revenue generated.
+
+
+B. Total Sales Amount by Customer:
+
+To determine the total amount spent by each customer, you can use SUM with grouping by customer:
+
+```
+SELECT customer_id, SUM(total_amount) as total_customer_spending
+FROM Sales
+GROUP BY customer_id;
+```
+
+This query provides insights into which customers have spent the most, allowing you to identify high-value customers.
+
+
+
+C. Total Sales Amount by Month:
+
+To analyze sales on a monthly basis, you can use SUM with date manipulation to group by month:
+
+
+```
+SELECT EXTRACT(MONTH FROM sale_date) as sale_month, SUM(total_amount) as monthly_sales
+FROM Sales
+GROUP BY sale_month;
+```
+
+
+This query helps you glean insights into monthly sales patterns and can be used for seasonality analysis.
+
+
+
+## 7. Aliases
+
+In PostgreSQL, aliases are used to assign temporary names or labels to columns, expressions, or tables in SQL queries. Aliases make the output of a query more readable and can be especially useful when dealing with complex or calculated data. They provide a way to rename columns, tables, or the results of expressions, making your SQL code more human-friendly.
+
+
+Example for Gleaning Insights:
+
+Let's say you have a "Sales" table and you want to calculate the total amount spent by customers and rename the column for clarity. You can use aliases for this:
 
 
 
 
+```
+SELECT customer_id, SUM(total_amount) AS total_spent
+FROM Sales
+GROUP BY customer_id
+ORDER BY total_spent DESC;
+```
 
+
+Without the Alias:
+
+
+```
+SELECT customer_id, SUM(total_amount) 
+FROM Sales
+GROUP BY customer_id
+ORDER BY total_spent DESC;
+```
+
+
+
+## 8. Aliases
+
+In PostgreSQL, and SQL in general, "joins" are used to combine rows from two or more tables based on a related column between them. Joins are a fundamental concept in relational databases, and they allow you to create more comprehensive result sets by connecting data from different tables. PostgreSQL supports several types of joins:
+
+
+![Screenshot 2023-11-07 at 15 53 33](https://github.com/AdeolaAdesina/SQL_Introduction/assets/29931071/084fb6fc-e285-42ec-be7d-b0af3824eea0)
+
+
+
+A. INNER JOIN:
+
+An INNER JOIN returns only the rows that have matching values in both tables.
+It excludes rows where there's no match in either of the tables.
+Useful for retrieving records that have related data in both tables.
+Example:
+
+
+```
+SELECT Customers.customer_name, Orders.order_date
+FROM Customers
+INNER JOIN Orders ON Customers.customer_id = Orders.customer_id;
+```
+
+
+
+B. LEFT JOIN (or LEFT OUTER JOIN):
+
+A LEFT JOIN returns all rows from the left table and the matching rows from the right table.
+If there's no match in the right table, NULL values are included.
+Useful for situations where you want to see all records from one table and any related records from the other.
+
+
+```
+SELECT Customers.customer_name, Orders.order_date
+FROM Customers
+LEFT JOIN Orders ON Customers.customer_id = Orders.customer_id;
+```
+
+Insight: You can use LEFT JOINs to see all customers and their order dates, including those who haven't placed orders.
+
+
+C. RIGHT JOIN (or RIGHT OUTER JOIN):
+
+A RIGHT JOIN is essentially the opposite of a LEFT JOIN.
+It returns all rows from the right table and the matching rows from the left table.
+If there's no match in the left table, NULL values are included.
+Useful when you want to see all records from the right table.
+
+
+```
+SELECT Customers.customer_name, Orders.order_date
+FROM Customers
+RIGHT JOIN Orders ON Customers.customer_id = Orders.customer_id;
+```
+
+Insight: You can use RIGHT JOINs to see all orders and the corresponding customer names, including orders without customers.
+
+
+
+D. FULL JOIN (or FULL OUTER JOIN):
+
+A FULL JOIN returns all rows when there is a match in either the left or the right table.
+It includes all rows from both tables and fills in NULL values where there's no match.
+Useful when you want to see all records from both tables.
+
+
+```
+SELECT Customers.customer_name, Orders.order_date
+FROM Customers
+FULL JOIN Orders ON Customers.customer_id = Orders.customer_id;
+```
+
+
+Insight: You can use FULL JOINs to see a comprehensive list of customers and their orders, including customers with no orders and orders with no customers.
 
 
 
