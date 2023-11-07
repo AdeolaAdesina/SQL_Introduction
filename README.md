@@ -500,7 +500,7 @@ ORDER BY total_spent DESC;
 
 
 
-## 8. Aliases
+## 8. Join
 
 In PostgreSQL, and SQL in general, "joins" are used to combine rows from two or more tables based on a related column between them. Joins are a fundamental concept in relational databases, and they allow you to create more comprehensive result sets by connecting data from different tables. PostgreSQL supports several types of joins:
 
@@ -575,6 +575,38 @@ FULL JOIN Orders ON Customers.customer_id = Orders.customer_id;
 
 Insight: You can use FULL JOINs to see a comprehensive list of customers and their orders, including customers with no orders and orders with no customers.
 
+
+
+## 9. Union
+
+In PostgreSQL, the UNION operator is used to combine the result sets of two or more SELECT statements into a single result set. The result set will contain all distinct rows from the individual queries, eliminating duplicates. UNION is a powerful tool for merging data from different sources or conditions and can be used to glean insights from diverse data sets.
+
+
+Let's say you have two tables, "Sales2022" and "Sales2023," and you want to combine the data to analyze sales trends over two years.
+
+```
+SELECT sale_date, total_amount
+FROM Sales2022
+UNION
+SELECT sale_date, total_amount
+FROM Sales2023
+ORDER BY sale_date;
+```
+
+
+
+
+## 9. Group By
+
+In PostgreSQL, the GROUP BY clause is used to group rows from a table based on the values in one or more columns. It is commonly used in conjunction with aggregate functions (such as SUM, COUNT, AVG, etc.) to perform summary calculations on the grouped data. The GROUP BY clause is a powerful tool for data analysis, allowing you to create summaries and glean insights from your data.
+
+
+
+```
+SELECT customer_id, COUNT(*) as order_count, SUM(total_amount) as total_spent
+FROM Sales
+GROUP BY customer_id;
+```
 
 
 
