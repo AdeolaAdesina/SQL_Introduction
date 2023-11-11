@@ -510,10 +510,11 @@ In PostgreSQL, and SQL in general, "joins" are used to combine rows from two or 
 
 
 Example Queries:
-Inner Join - Customer and Sales:
 
-sql
-Copy code
+
+### Inner Join - Customer and Sales:
+
+```
 SELECT
     c.customer_id,
     c.customer_name,
@@ -522,13 +523,17 @@ SELECT
 FROM
     Customer c
 INNER JOIN Sales s ON c.customer_id = s.customer_id;
+```
+
 Insight:
 
 This query can provide a list of customers who made purchases along with details of their sales. You can analyze customer-specific sales data.
-Left Join - Product and SalesItem:
 
-sql
-Copy code
+
+
+### Left Join - Product and SalesItem:
+
+```
 SELECT
     p.product_id,
     p.product_name,
@@ -537,13 +542,16 @@ SELECT
 FROM
     Product p
 LEFT JOIN SalesItem si ON p.product_id = si.product_id;
+```
+
 Insight:
 
 This query will show all products, including those that haven't been sold. You can identify products that haven't generated sales or analyze sales for each product.
-Right Join - Sales and SalesItem:
 
-sql
-Copy code
+
+### Right Join - Sales and SalesItem:
+
+```
 SELECT
     s.sale_id,
     s.customer_id,
@@ -552,13 +560,17 @@ SELECT
 FROM
     Sales s
 RIGHT JOIN SalesItem si ON s.sale_id = si.sale_id;
+```
+
+
 Insight:
 
 This query can help identify sales items that may not be associated with a specific sale. You can analyze incomplete sales data or identify potential data inconsistencies.
-Full Join - Customer and Sales:
 
-sql
-Copy code
+
+### Full Join - Customer and Sales:
+
+```
 SELECT
     c.customer_id,
     c.customer_name,
@@ -567,6 +579,8 @@ SELECT
 FROM
     Customer c
 FULL JOIN Sales s ON c.customer_id = s.customer_id;
+```
+
 Insight:
 
 This query will show all customers and their sales, including customers who haven't made any purchases. Useful for analyzing customer engagement.
