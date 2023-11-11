@@ -509,71 +509,67 @@ In PostgreSQL, and SQL in general, "joins" are used to combine rows from two or 
 
 
 
-A. INNER JOIN:
+Example Queries:
+Inner Join - Customer and Sales:
 
-An INNER JOIN returns only the rows that have matching values in both tables.
-It excludes rows where there's no match in either of the tables.
-Useful for retrieving records that have related data in both tables.
-Example:
+sql
+Copy code
+SELECT
+    c.customer_id,
+    c.customer_name,
+    s.sale_id,
+    s.sale_date
+FROM
+    Customer c
+INNER JOIN Sales s ON c.customer_id = s.customer_id;
+Insight:
 
+This query can provide a list of customers who made purchases along with details of their sales. You can analyze customer-specific sales data.
+Left Join - Product and SalesItem:
 
-```
-SELECT Customers.customer_name, Orders.order_date
-FROM Customers
-INNER JOIN Orders ON Customers.customer_id = Orders.customer_id;
-```
+sql
+Copy code
+SELECT
+    p.product_id,
+    p.product_name,
+    si.quantity,
+    si.item_price
+FROM
+    Product p
+LEFT JOIN SalesItem si ON p.product_id = si.product_id;
+Insight:
 
+This query will show all products, including those that haven't been sold. You can identify products that haven't generated sales or analyze sales for each product.
+Right Join - Sales and SalesItem:
 
+sql
+Copy code
+SELECT
+    s.sale_id,
+    s.customer_id,
+    si.product_id,
+    si.quantity
+FROM
+    Sales s
+RIGHT JOIN SalesItem si ON s.sale_id = si.sale_id;
+Insight:
 
-B. LEFT JOIN (or LEFT OUTER JOIN):
+This query can help identify sales items that may not be associated with a specific sale. You can analyze incomplete sales data or identify potential data inconsistencies.
+Full Join - Customer and Sales:
 
-A LEFT JOIN returns all rows from the left table and the matching rows from the right table.
-If there's no match in the right table, NULL values are included.
-Useful for situations where you want to see all records from one table and any related records from the other.
+sql
+Copy code
+SELECT
+    c.customer_id,
+    c.customer_name,
+    s.sale_id,
+    s.total_amount
+FROM
+    Customer c
+FULL JOIN Sales s ON c.customer_id = s.customer_id;
+Insight:
 
-
-```
-SELECT Customers.customer_name, Orders.order_date
-FROM Customers
-LEFT JOIN Orders ON Customers.customer_id = Orders.customer_id;
-```
-
-Insight: You can use LEFT JOINs to see all customers and their order dates, including those who haven't placed orders.
-
-
-C. RIGHT JOIN (or RIGHT OUTER JOIN):
-
-A RIGHT JOIN is essentially the opposite of a LEFT JOIN.
-It returns all rows from the right table and the matching rows from the left table.
-If there's no match in the left table, NULL values are included.
-Useful when you want to see all records from the right table.
-
-
-```
-SELECT Customers.customer_name, Orders.order_date
-FROM Customers
-RIGHT JOIN Orders ON Customers.customer_id = Orders.customer_id;
-```
-
-Insight: You can use RIGHT JOINs to see all orders and the corresponding customer names, including orders without customers. 
-
-
-
-D. FULL JOIN (or FULL OUTER JOIN):
-
-A FULL JOIN returns all rows when there is a match in either the left or the right table.
-It includes all rows from both tables and fills in NULL values where there's no match.
-Useful when you want to see all records from both tables.
-
-
-```
-SELECT Customers.customer_name, Orders.order_date
-FROM Customers
-FULL JOIN Orders ON Customers.customer_id = Orders.customer_id;
-```
-
-
-Insight: You can use FULL JOINs to see a comprehensive list of customers and their orders, including customers with no orders and orders with no customers.
+This query will show all customers and their sales, including customers who haven't made any purchases. Useful for analyzing customer engagement.
 
 
 
