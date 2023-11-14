@@ -621,7 +621,213 @@ GROUP BY customer_id;
 
 
 
+# Class Project 
 
+
+Below are sample datasets for an e-commerce company based in London, containing five tables: Customer, Product, Order, OrderItem, and Category.
+
+Data Schema:
+
+1. 
+
+Customer Table:
+
+customer_id (Primary Key)
+customer_name
+email
+city
+country
+
+```
+CREATE TABLE Customer (
+    customer_id SERIAL PRIMARY KEY,
+    customer_name VARCHAR(100),
+    email VARCHAR(100),
+    city VARCHAR(50),
+    country VARCHAR(50)
+);
+```
+
+To insert into customer table:
+
+```
+INSERT INTO Customer (customer_id, customer_name, email, city, country)
+VALUES
+    (1, 'John Doe', 'john.doe@email.com', 'London', 'United Kingdom'),
+    (2, 'Alice Smith', 'alice.smith@email.com', 'London', 'United Kingdom'),
+    (3, 'Bob Johnson', 'bob.johnson@email.com', 'Manchester', 'United Kingdom'),
+    (4, 'Emma Davis', 'emma.davis@email.com', 'Birmingham', 'United Kingdom'),
+    (5, 'Michael Wilson', 'michael.wilson@email.com', 'London', 'United Kingdom'),
+    (6, 'Sophie Brown', 'sophie.brown@email.com', 'Edinburgh', 'United Kingdom'),
+    (7, 'James White', 'james.white@email.com', 'London', 'United Kingdom'),
+    (8, 'Olivia Taylor', 'olivia.taylor@email.com', 'Manchester', 'United Kingdom'),
+    (9, 'Daniel Harris', 'daniel.harris@email.com', 'London', 'United Kingdom'),
+    (10, 'Emily Hall', 'emily.hall@email.com', 'Birmingham', 'United Kingdom');
+
+```
+
+
+
+
+2.
+
+Product Table:
+
+product_id (Primary Key)
+product_name
+price
+category_id (Foreign Key)
+
+```
+CREATE TABLE Product (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100),
+    price DECIMAL(10, 2),
+    category_id INT,
+    FOREIGN KEY (category_id) REFERENCES Category(category_id)
+);
+```
+
+
+To insert data into product table:
+
+```
+INSERT INTO Product (product_id, product_name, price, category_id)
+VALUES
+    (1, 'Laptop', 1200.00, 1),
+    (2, 'Smartphone', 800.00, 1),
+    (3, 'Headphones', 100.00, 2),
+    (4, 'Camera', 600.00, 3),
+    (5, 'Printer', 300.00, 3),
+    (6, 'Tablet', 500.00, 1),
+    (7, 'Mouse', 20.00, 2),
+    (8, 'Keyboard', 30.00, 2),
+    (9, 'External Hard Drive', 80.00, 3),
+    (10, 'Monitor', 250.00, 1);
+
+```
+
+
+
+
+3.
+
+Order Table:
+
+order_id (Primary Key)
+customer_id (Foreign Key)
+order_date
+
+
+```
+CREATE TABLE Order (
+    order_id SERIAL PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
+);
+```
+
+To insert data into Order table:
+
+
+
+```
+INSERT INTO "Order" (order_id, customer_id, order_date)
+VALUES
+    (1, 1, '2023-11-01'),
+    (2, 2, '2023-11-02'),
+    (3, 3, '2023-11-02'),
+    (4, 1, '2023-11-03'),
+    (5, 4, '2023-11-03'),
+    (6, 5, '2023-11-04'),
+    (7, 2, '2023-11-05'),
+    (8, 3, '2023-11-05'),
+    (9, 1, '2023-11-06'),
+    (10, 4, '2023-11-07');
+
+```
+
+4. 
+
+OrderItem Table:
+
+order_item_id (Primary Key)
+order_id (Foreign Key)
+product_id (Foreign Key)
+quantity
+total_price
+
+To create table:
+
+```
+CREATE TABLE OrderItem (
+    order_item_id SERIAL PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    total_price DECIMAL(10, 2),
+    FOREIGN KEY (order_id) REFERENCES Order(order_id),
+    FOREIGN KEY (product_id) REFERENCES Product(product_id)
+);
+```
+
+```
+INSERT INTO OrderItem (order_item_id, order_id, product_id, quantity, total_price)
+VALUES
+    (1, 1, 1, 2, 2400.00),
+    (2, 2, 3, 1, 100.00),
+    (3, 3, 5, 3, 1800.00),
+    (4, 4, 2, 1, 800.00),
+    (5, 5, 4, 2, 1200.00),
+    (6, 6, 1, 1, 1200.00),
+    (7, 7, 8, 1, 30.00),
+    (8, 8, 6, 2, 1000.00),
+    (9, 9, 9, 1, 80.00),
+    (10, 10, 7, 1, 20.00);
+
+```
+
+5.
+
+Category Table:
+category_id (Primary Key)
+category_name
+
+
+```
+CREATE TABLE Category (
+    category_id SERIAL PRIMARY KEY,
+    category_name VARCHAR(50)
+);
+```
+
+To insert data into category table:
+
+```
+INSERT INTO Category (category_id, category_name)
+VALUES
+    (1, 'Electronics'),
+    (2, 'Accessories'),
+    (3, 'Peripherals');
+```
+
+Questions:
+
+Customer Analysis:
+
+- Identify the top 5 customers who have spent the most on orders.
+- Provide their names, email addresses, and total amount spent.
+  
+Product Performance:
+
+- Find the top 3 best-selling products by quantity.
+- Include the product names, total quantity sold, and the category of each product.
+  
+Order Analysis:
+
+- Determine the total revenue generated for each month in the last year.
+- Present the results with the month and the corresponding total revenue.
 
 
 
