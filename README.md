@@ -839,3 +839,25 @@ Order Analysis:
 1. Always understand all the tables in the database.
 2. Always understand the relationships between all the tables.
 3. Identify the tables needed to solve a particular problem
+
+
+
+Identify the top 5 customers who have spent the most on orders.
+
+```
+SELECT
+    c.customer_id,
+    c.customer_name,
+    SUM(oi.total_price) AS total_spent
+FROM
+    Customer c
+JOIN
+    Orderr o ON c.customer_id = o.customer_id
+JOIN
+    OrderItem oi ON o.order_id = oi.order_id
+GROUP BY
+    c.customer_id, c.customer_name
+ORDER BY
+    total_spent DESC
+LIMIT 5;
+```
