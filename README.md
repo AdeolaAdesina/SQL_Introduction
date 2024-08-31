@@ -837,8 +837,8 @@ Order Analysis:
 ## Assistance to solving problems in SQL
 
 1. Always understand all the tables in the database.
-2. Always understand the relationships between all the tables.
-3. Identify the tables needed to solve a particular problem
+2. Always understand the relationships between all the tables/ and join them.
+3. Identify the tables needed to solve a particular problem/ and figure out the syntax needed to solve the problem.
 
 
 
